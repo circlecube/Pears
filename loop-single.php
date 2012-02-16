@@ -21,6 +21,15 @@
 <?php $key="css"; echo get_post_meta($post->ID, $key, true); ?>
 </style>
 
+
+		<?php if($post->post_content != "") {?>
+		<div id="pattern-notes" class="mod">
+			<h3 class="label">Notes</h3>
+			<?php the_content(); ?>
+		</div>
+		<?php } ?>
+
+
 <div id="pattern" class="mod group">
 			<h3 class="label">Pattern</h3> 
 			
@@ -32,10 +41,11 @@
 		</div>
 		
 		<div class="group">
-			<div id="markup" class="mod">
-				<h3 class="label">HTML</h3> <a href="#" class="clip" title="select code for copying"><img src="/wp-content/themes/pears/images/icon-copy.png" alt="copy" /></a>
-				<textarea class="mod-ta">
-<?php $key="html"; echo get_post_meta($post->ID, $key, true); ?>			
+			
+			<div id="prestyle" class="mod">
+				<h3 class="label">LESS</h3> <a href="#" class="clip" title="select code for copying"><img src="/wp-content/themes/pears/images/icon-copy.png" alt="copy" /></a>
+				<textarea id="less-code" class="mod-ta">
+<?php $key="less"; echo get_post_meta($post->ID, $key, true); ?>
 				</textarea>
 			</div>
 			
@@ -46,12 +56,13 @@
 				</textarea>
 			</div>
 		</div>
-		
-		<?php if($post->post_content != "") {?>
-		<div id="pattern-notes" class="mod">
-			<h3 class="label">Notes</h3>
-			<?php the_content(); ?>
-		</div>
-		<?php } ?>
+
+		<div id="markup" class="mod">
+				<h3 class="label">HTML</h3> <a href="#" class="clip" title="select code for copying"><img src="/wp-content/themes/pears/images/icon-copy.png" alt="copy" /></a>
+				<textarea class="mod-ta">
+<?php $key="html"; echo get_post_meta($post->ID, $key, true); ?>			
+				</textarea>
+			</div>
+
 
 <?php endwhile; // end of the loop. ?>
