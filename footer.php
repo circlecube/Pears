@@ -68,15 +68,18 @@ $(document).ready(function() {
 
 	// auto-select code in textarea when clipboard icon is clicked
 	$('#markup a.clip').click(function(){
-		//$('#markup textarea').select();
+		html_editor.setSelection({line:0,ch:0}, {line:html_editor.lineCount(), ch:null});
+		html_editor.focus();
 		return false;
 	});
 	$('#prestyle a.clip').click(function(){
-		//$('#prestyle textarea').select();
+		less_editor.setSelection({line:0,ch:0}, {line:less_editor.lineCount(), ch:null});
+		less_editor.focus();
 		return false;
 	});
 	$('#style a.clip').click(function(){
-		//$('#style textarea').select();
+		css_editor.setSelection({line:0,ch:0}, {line:css_editor.lineCount(), ch:null});
+		css_editor.focus();
 		return false;
 	});
 
