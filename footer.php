@@ -13,16 +13,22 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.color.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/CodeMirror-2.21/lib/codemirror.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/CodeMirror-2.21/mode/less/less.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/CodeMirror-2.21/mode/css/css.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/CodeMirror-2.21/mode/xml/xml.js"></script>
 
 <script>
 $(document).ready(function() { 
 	// update rendered pattern when user edits the textareas
 	$('#markup textarea').live('keyup', function(e) {
-		$('#pattern-wrap').html($(this).val());
+		html_editor.save();
+		$('#pattern-wrap').html($('#html-code').val());
 	});
 	$('#prestyle textarea').live('keyup', function(e) {
+		less_editor.save();
 		//process the less content into css, 
-		var less_data = $('#prestyle textarea').val();
+		var less_data = $('#less-code').val();
 		try{
 			new(less.Parser)().parse(less_data, function (e, tree) {
 			
@@ -30,9 +36,10 @@ $(document).ready(function() {
 				var css_data = tree.toCSS();
 				//copy it into the css textarea and
 				if (css_data != "") {
-					$('#style textarea').html(css_data);			
+					$('#style textarea').val(css_data);
+					css_editor.setValue(css_data);
 					//copy it into the css textarea and apply the styles.
-					$('div.main style').html($('#style textarea').val());
+					$('div.main style').html($('#css-code').val());
 					
 					//user feedback
 					$('#style').animate( { 'background-color': 'rgba(161, 207, 50, 0.6)' }, {queue:false,  duration:800, complete: function(){
@@ -54,22 +61,29 @@ $(document).ready(function() {
 		
 	});
 	$('#style textarea').live('keyup', function(e) {
-		$('div.main style').html($(this).val());
+		css_editor.save();
+		$('div.main style').html($('#css-code').val());
 	});
 	
+
 	// auto-select code in textarea when clipboard icon is clicked
 	$('#markup a.clip').click(function(){
-		$('#markup textarea').select();
+		//$('#markup textarea').select();
 		return false;
 	});
 	$('#prestyle a.clip').click(function(){
-		$('#prestyle textarea').select();
+		//$('#prestyle textarea').select();
 		return false;
 	});
 	$('#style a.clip').click(function(){
-		$('#style textarea').select();
+		//$('#style textarea').select();
 		return false;
 	});
+
+	//code hinting
+	var css_editor = CodeMirror.fromTextArea(document.getElementById("css-code"), {mode: 'css', lineWrapping: true, lineNumbers: true});
+	var less_editor = CodeMirror.fromTextArea(document.getElementById("less-code"), {mode: 'less', lineWrapping: true, lineNumbers: true});
+	var html_editor = CodeMirror.fromTextArea(document.getElementById("html-code"), {mode: 'xml', lineWrapping: true, lineNumbers: true});
 	
 	// expand/collapse side nav
 	$('#nav-toggle').click(function() {
