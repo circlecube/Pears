@@ -33,7 +33,7 @@
 <div id="pattern" class="mod group">
 			<h3 class="label">Pattern</h3> 
 			
-			<h4><?php the_category(' '); ?> <span class="sep">&rarr;</span> <?php the_title(); ?></h4>
+			<h4><?php the_category(' '); ?> <span class="sep">&rarr;</span> <?php the_title(); ?> <?php edit_post_link('Edit ' .  get_the_title(), '<span class="sep">&rarr;</span> <span class="edit-link">', '</span>'); ?></h4>
 			
 			<div id="pattern-wrap" class="group">
 <?php $key="html"; echo get_post_meta($post->ID, $key, true); ?>
@@ -47,6 +47,9 @@
 				<a href="#" class="clip" title="select code for copying"><img src="/wp-content/themes/pears/images/icon-copy.png" alt="copy" /></a>
 				<textarea id="less-code" class="mod-ta">
 <?php $key="less"; echo get_post_meta($post->ID, $key, true); ?>
+				</textarea>
+				<textarea id="global_mixins" style="display:none;">
+<?php $key="less"; echo get_post_meta(16, $key, true); ?>
 				</textarea>
 			</div>
 			

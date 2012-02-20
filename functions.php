@@ -533,10 +533,10 @@ function pears_meta_box( $post ) {
 	echo '<p>These fields are for the HTML markup and CSS styles.  The post body can be used for notes.</p>';
 	echo '<label for="html">HTML</label>';
   	echo '<p><textarea id="html" name="html" rows="20" cols="90" />' . $html . '</textarea></p>';
-	echo '<label for="less">LESS</label>	';
+	echo '<label for="less">LESS/CSS</label>	';
   	echo '<p><textarea id="less" name="less" rows="20" cols="90" />' . $less . '</textarea></p>';
-	echo '<label for="css">CSS</label>	';
-  	echo '<p><textarea id="css" name="css" rows="20" cols="90" />' . $css . '</textarea></p>';
+	//echo '<label for="css">CSS</label>	';
+  	//echo '<p><textarea id="css" name="css" rows="20" cols="90" />' . $css . '</textarea></p>';
 }
 
 function pears_save_post( $post_id ) {
@@ -562,8 +562,8 @@ function pears_save_post( $post_id ) {
   	$html_data = $_POST['html'];
 	update_post_meta($post_id, 'html', $html_data);
 	
-	$css_data = $_POST['css'];
-	update_post_meta($post_id, 'css', $css_data);
+	//$css_data = $_POST['css'];
+	//update_post_meta($post_id, 'css', $css_data);
 	
 	$less_data = $_POST['less'];
 	update_post_meta($post_id, 'less', $less_data);

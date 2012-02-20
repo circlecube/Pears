@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Pears <?php wp_title('/', true, 'left'); ?></title>
+<title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
